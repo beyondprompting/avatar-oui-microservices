@@ -1,0 +1,9 @@
+version: "3.8"
+
+services:
+  support-it-mcp:
+    build: ./support-it
+    container_name: support-it-mcp
+    ports:
+      - "1111:1111"
+    restart: unless-stopped
