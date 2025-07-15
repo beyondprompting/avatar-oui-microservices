@@ -1,0 +1,18 @@
+version: "3.8"
+
+services:
+  support-it-mcp:
+    build: ./support-it
+    container_name: support-it-mcp
+    ports:
+      - "1111:1111"
+    restart: unless-stopped
+    environment:
+      PHONEBOOK_URL: "https://avatar-it.s3.us-east-1.amazonaws.com/voip/phonebook.xml"
+
+  message-json:
+    build: ./message-json
+    container_name: message-json
+    ports:
+      - "2222:8081"
+    restart: unless-stopped
