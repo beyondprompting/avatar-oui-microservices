@@ -9,3 +9,10 @@ services:
     restart: unless-stopped
     environment:
       PHONEBOOK_URL: "https://avatar-it.s3.us-east-1.amazonaws.com/voip/phonebook.xml"
+
+  message-json:
+    build: ./message-json
+    container_name: message-json
+    ports:
+      - "2222:8081"
+    restart: unless-stopped
