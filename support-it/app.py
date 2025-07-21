@@ -2,8 +2,8 @@ import asyncio
 import json
 import sys
 import argparse
-import requests
 import os
+import requests
 import xml.etree.ElementTree as ET
 from typing import Optional, Dict, Any
 from mcp.server import Server
@@ -43,6 +43,7 @@ async def list_tools() -> list[Tool]:
     return [
         Tool(
             name="lookup_internal_number",
+            title="Agenda Telefónica",
             description="Busca un nombre por número interno o un número por nombre.",
             inputSchema={
                 "type": "object",
@@ -60,6 +61,7 @@ async def list_tools() -> list[Tool]:
         ),
         Tool(
             name="vpn_instructions",
+            title="Soporte VPN",
             description="Proporciona ayuda para conectarse a la VPN de la empresa.",
             inputSchema={
                 "type": "object",
@@ -139,65 +141,65 @@ def handle_lookup_internal_number(name: Optional[str] = None, number: Optional[s
 
 VPN_RESPONSE = """SOPORTE PARA CONEXIÓN VPN
 
-    Tu tarea principal también incluye guiar paso a paso a los usuarios para conectarse a la VPN de la empresa. Debés:
+Tu tarea principal también incluye guiar paso a paso a los usuarios para conectarse a la VPN de la empresa. Debés:
 
-    - Reconocer en qué paso está el usuario.
-    - Guiarlo en forma clara y precisa hacia el siguiente paso.
-    - Explicar cada paso con calma si lo piden.
-    - Responder consultas relacionadas con errores o dudas comunes.
+- Reconocer en qué paso está el usuario.
+- Guiarlo en forma clara y precisa hacia el siguiente paso.
+- Explicar cada paso con calma si lo piden.
+- Responder consultas relacionadas con errores o dudas comunes.
 
-    ---
+---
 
-    **Pasos para la configuración del cliente:**
+**Pasos para la configuración del cliente:**
 
-    **Paso 1**  
-    Descargar e instalar cliente "FortiClient" según su sistema operativo: https://forticlient.com/downloads
+**Paso 1**  
+Descargar e instalar cliente "FortiClient" según su sistema operativo: https://forticlient.com/downloads
 
-    **Paso 2**  
-    Seleccionar "Configure VPN"
+**Paso 2**  
+Seleccionar "Configure VPN"
 
-    **Paso 3**  
-    Seleccionar "IPsec VPN" y completar con los siguientes datos:
-    - Connection Name: Avatar BA  
-    - Description: Avatar Buenos Aires  
-    - Remote Gateway: 190.221.60.58  
-    - Authentication Method "Pre-shared key": <recibida por correo electrónico>  
-    - Presionar "Apply"
+**Paso 3**  
+Seleccionar "IPsec VPN" y completar con los siguientes datos:
+- Connection Name: Avatar BA  
+- Description: Avatar Buenos Aires  
+- Remote Gateway: 190.221.60.58  
+- Authentication Method "Pre-shared key": <recibida por correo electrónico>  
+- Presionar "Apply"
 
-    **Paso 4**  
-    Ejecutar el cliente Forticlient, seleccionar la conexión "Avatar BA" recién creada y acceder utilizando el usuario y contraseña de VPN recibido por correo.
+**Paso 4**  
+Ejecutar el cliente Forticlient, seleccionar la conexión "Avatar BA" recién creada y acceder utilizando el usuario y contraseña de VPN recibido por correo.
 
-    ---
+---
 
-    **FAQ (Preguntas frecuentes)**
+**FAQ (Preguntas frecuentes)**
 
-    **¿Qué hago si no tengo usuario de VPN?**  
-    Tenés que enviar un correo a it@avatarla.con solicitando el acceso. Podés poner en copia a tu referente así el proceso de autorización es más rápido.
+**¿Qué hago si no tengo usuario de VPN?**  
+Tenés que enviar un correo a it@avatarla.con solicitando el acceso. Podés poner en copia a tu referente así el proceso de autorización es más rápido.
 
-    **¿Cómo accedo a los servidores una vez conectado a la VPN?**
+**¿Cómo accedo a los servidores una vez conectado a la VPN?**
 
-    *En Windows*  
-    Abrir el Explorador de Archivos:  
-    Presiona Win + E para abrir el Explorador de Archivos.  
-    Seleccionar "Conectar a unidad de red":  
-    Haz clic en "Este equipo" (o "Mi PC") en el panel izquierdo.  
-    Selecciona "Conectar a unidad de red".  
-    Elige una letra para la unidad: Z:, por ejemplo.  
-    En la carpeta, escribe \\192.168.3.3\[nombre_compartido].
+*En Windows*  
+Abrir el Explorador de Archivos:  
+Presiona Win + E para abrir el Explorador de Archivos.  
+Seleccionar "Conectar a unidad de red":  
+Haz clic en "Este equipo" (o "Mi PC") en el panel izquierdo.  
+Selecciona "Conectar a unidad de red".  
+Elige una letra para la unidad: Z:, por ejemplo.  
+En la carpeta, escribe \\192.168.3.3\[nombre_compartido].
 
-    *En Mac (OSx)*  
-    Presiona Cmd + K en el Finder.  
-    Escribe: smb://192.168.3.3/[nombre_compartido]  
-    Haz clic en "Conectar".  
-    Introduce usuario y contraseña si es necesario.
+*En Mac (OSx)*  
+Presiona Cmd + K en el Finder.  
+Escribe: smb://192.168.3.3/[nombre_compartido]  
+Haz clic en "Conectar".  
+Introduce usuario y contraseña si es necesario.
 
-    **Principales servidores disponibles:**  
-    - SRVFS1: \\192.168.3.6  
-    - SRVDC1: \\192.168.3.3  
-    - SRVDC2: \\192.168.3.31
+**Principales servidores disponibles:**  
+- SRVFS1: \\192.168.3.6  
+- SRVDC1: \\192.168.3.3  
+- SRVDC2: \\192.168.3.31
 
-    **¿Si descargo archivos o miro YouTube conectado a la VPN uso el ancho de banda de la empresa?**  
-    Sí. Se recomienda desconectarse si no estás trabajando.
+**¿Si descargo archivos o miro YouTube conectado a la VPN uso el ancho de banda de la empresa?**  
+Sí. Se recomienda desconectarse si no estás trabajando.
 """
 
 # === Main ===
