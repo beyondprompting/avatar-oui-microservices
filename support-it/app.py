@@ -42,8 +42,7 @@ PHONEBOOK_ENTRIES = load_phonebook()
 async def list_tools() -> list[Tool]:
     return [
         Tool(
-            name="lookup_internal_number",
-            title="Agenda Telefónica",
+            name="agenda_telefonica",
             description="Busca un nombre por número interno o un número por nombre.",
             inputSchema={
                 "type": "object",
@@ -60,8 +59,7 @@ async def list_tools() -> list[Tool]:
             }
         ),
         Tool(
-            name="vpn_instructions",
-            title="Soporte VPN",
+            name="soporte_vpn",
             description="Proporciona ayuda para conectarse a la VPN de la empresa.",
             inputSchema={
                 "type": "object",
