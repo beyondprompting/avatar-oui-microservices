@@ -75,14 +75,14 @@ async def list_tools() -> list[Tool]:
 
 @server.call_tool()
 async def call_tool(name: str, arguments: dict) -> list[TextContent]:
-    if name == "lookup_internal_number":
+    if name == "agenda_telefonica":
         result = handle_lookup_internal_number(
             name=arguments.get("name"),
             number=arguments.get("number")
         )
         return [TextContent(type="text", text=json.dumps(result, indent=2, ensure_ascii=False))]
     
-    elif name == "vpn_instructions":
+    elif name == "soporte_vpn":
         return [TextContent(type="text", text=VPN_RESPONSE)]
 
     else:
