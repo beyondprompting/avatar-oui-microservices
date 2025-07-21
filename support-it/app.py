@@ -214,8 +214,8 @@ async def main():
     print("=" * 60)
     print("🔧 SERVIDOR MCP DE SOPORTE IT")
     print("Herramientas:")
-    print("  - lookup_internal_number")
-    print("  - vpn_instructions")
+    print("  - agenda_telefonica")
+    print("  - soporte_vpn")
     print("=" * 60)
 
     async with mcp.server.stdio.stdio_server() as (read_stream, write_stream):
